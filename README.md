@@ -1,24 +1,10 @@
-# vue-todo-list
+# Todo list
+vuex를 이용하여 localStorage에서 데이터를 관리하는 투두리스트
 
-## Project setup
-```
-npm install
-```
+## Demo
+[Demo](https://pistachio8.io/Todolist-vue)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Tools
+1. Vue.js
+1. Vuex
+1. Scss
