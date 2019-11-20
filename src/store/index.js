@@ -37,9 +37,9 @@ export default new Vuex.Store({
         memo: payload.memo,
         done: false
       }
+
       state.todos.push(todo);
       this.commit('updateList');
-      
     },
     updateList() {
       this.subscribe( (mutations, state) => {
@@ -49,31 +49,29 @@ export default new Vuex.Store({
     deleteList(state, payload) {
       const index = state.todos.findIndex( todo => {
           return todo.id === payload
-      })
-      
+      });
+
       state.todos.splice(index, 1);
       this.commit('updateList');
     },
     clearList(state) {
       state.todos = [];
       this.commit('updateList');
-    }
-  },
-  actions: {
-    addList({commit}, payload) {
-      
-      if (payload.memo === null || payload.memo === "") {
-        alert('할 일을 입력해주세요')
-        return;
-      } 
-      commit('addList', payload);
     },
-    updateList({state, commit}, payload) {
+    updateState(state, payload) {
       const index = state.todos.findIndex( todo => {
         return todo.id === payload.id
       });
       state.todos[index].done = payload.updatedState
-      commit('updateList');
+    }
+  },
+  actions: {
+    addList({commit}, payload) {
+      if (payload.memo === null || payload.memo.trim() === "") {
+        alert('할 일을 입력해주세요')
+        return;
+      } 
+      commit('addList', payload);
     }
   }
 })

@@ -23,7 +23,7 @@
                         :id="'todo_' + todo.id"
                         class="todo-checkbox"
                         :checked="todo.done"
-                        @change.prevent="updateState(todo.id, todo.done, $event)"
+                        @change.prevent="updateTodoState(todo.id, todo.done, $event)"
                     >
                     <label :for="'todo_' + todo.id"></label>    
                     <p>{{ todo.memo }}</p>                
@@ -43,7 +43,7 @@
                         :id="'todo_' + todo.id"
                         class="todo-checkbox"
                         :checked="todo.done"
-                        @change.prevent="updateState(todo.id, todo.done, $event)"
+                        @change.prevent="updateTodoState(todo.id, todo.done, $event)"
                         
                     >
                     <label :for="'todo_' + todo.id"></label>
@@ -58,7 +58,7 @@
             v-if="hasList"
             @click="clearList()" 
             class="btn-clear"
-        >모두 완료</a>
+        >모두 삭제</a>
     </div>
 </template>
 <script>
@@ -102,20 +102,21 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['addList', 'updateList']),
-        ...mapMutations(['deleteList', 'clearList']),
+        ...mapActions(['addList']),
+        ...mapMutations(['deleteList', 'clearList', 'updateState']),
 
         addTodo(memo) {
             let todo = {
                 memo: memo,
                 done: false
             }
+            
             this.addList(todo);
             this.memo = null;
         },
-        updateState(id, state, $event) {
+        updateTodoState(id, state, $event) {
             let updatedState = !state; 
-            this.updateList({id, updatedState});
+            this.updateState({id, updatedState});
             
             $event.target.checked = state;
         }
